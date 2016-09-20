@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Adhan Beta </title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="background"></div>
+        <div class="app">
+            <header>
+                <h1> Adhan.me  ( Beta ) </h1> 
+            </header>
+            <!-- <nav> <a> Adhan </a> <a> Alaram </a> </nav> -->
+            <main>
+                <div class="current" id="current">
+                    <time > 
+                    	<span class="hm"> </span>
+                        <div class="prd">
+                            <span class="a"></span>
+                            <span class="s"></span>
+                        </div>
+                    </time>
+                    <span class="date"></span>
+                    <span class="location"> </span>
+                </div>
+                <div class="timings">
+                    <div class="loading">  Loading , please wait </div>
+                </div>
+            </main>
+            <footer> 
+                <p> &copy; Adhan.me  2016</p>
+            </footer>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script   src="https://code.jquery.com/jquery-3.0.0.min.js"   integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+
+    	(function($){
+
+            var midnight = new Date().setHours(0,0,0,0);
+            var nowDiff = new Date().getTime() - midnight;
+            var nextNamaz = 'fajr'
+            var inNamazes = ['fajr','shurooq','dhuhr','asr','maghrib','isha']
+            var timings;
+            var location;
+            var init = function(){
+                updateCurrentTime();
+                getTimings().then(function(data){
+                    timings = modifyTimings(data.items[0])
+                    location = data.city;
+                    calculateDiff()
+                    updateTimings()
+                })
+            }
+            var getTimings = function(fn){
+
+                return $.when($.getJSON('http://muslimsalat.com/daily.json?key=API_KEY&jsoncallback=?'))
+            }
+            var _updateCurrentTime = function(){
+                $('#current .hm').html(moment().format('hh:mm'))
+                $('#current .s').html(moment().format('ss'))
+                $('#current .a').html(moment().format('A'))
+                $('#current .date').html(moment().format('LL'))
+
+            }
+            var updateCurrentTime = function(){
+                setInterval(function(){
+                        _updateCurrentTime()
+                },1000)
+                _updateCurrentTime()
+            }
+
+           var  modifyTimings = function  (timings){
+                var out = [];
+                for(let k in timings){
+                    if(inNamazes.indexOf(k)>-1)
+                    out.push({n : k , t : timings[k]})
+                }
+                return out
+            }
+            var calculateDiff = function () {
+                timings = timings.map(function(t){
+                    t.diff =  moment(t.t,["h:mm A"]).format('x') - midnight
+                    return t ;
+                })
+                nextNamaz = (timings.filter(function(t){
+                    return t.diff > nowDiff;
+                })[0] || timings[0]).n
+            }
+            var updateTimings = function(){
+                var items = timings.map(function(a){
+                        var active = a.n === nextNamaz ? 'active' : ''
+                        return (" <div class='adhan "+ active +"'> <h3>"+a.n +" </h3> <time>"+a.t+"</time> </div>")
+                })
+                $('.timings').html(items)
+                $('.location').html(location)
+            }
+            $(document).ready(init)
+    	})($)
+    </script>
+</body>
+
+</html>

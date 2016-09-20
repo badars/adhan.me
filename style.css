@@ -1,0 +1,56 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {margin: 0;    padding: 0;    border: 0;    font-size: 100%;    font: inherit;    vertical-align: baseline;}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}
+body {line-height: 1;}
+ol, ul {    list-style: none;}
+blockquote, q {    quotes: none;}
+blockquote:before, blockquote:after, q:before, q:after {content: "";content: none;}
+table {    border-collapse: collapse;    border-spacing: 0;}
+
+*{ position: relative;}
+html {   height: 100%;     zoom: 100%;}
+body { background: #fff; color : #026470;font-family: 'Roboto Mono',"Sans Serif";min-height: 100%;font-size: 100%; }
+a {color : #026470;}
+section { width: 100%;display: block;}
+
+.wrapper { background-image: linear-gradient(to bottom, rgba(242, 242, 242, 1) 300px, rgba(242, 242, 242, 0) 500px); }
+.background{height: 398px;position: absolute;top: 0;width: 100%;background: #026470;}
+
+.app{  width: 100%; max-width: 720px; margin: 0px auto; font-weight: bold;  }
+header{padding: 20px 0; margin-bottom: 20px }
+header h1 { font-size: 16px; color: #fff; text-transform: uppercase; }
+
+nav a { display: inline-block; margin-right: 20px; font-size: 10px; color: #fff; text-transform: uppercase; font-weight: bold; }
+main { background: #fff; width: 100%;  margin: 10px 0; box-shadow: 1px 1px 10px 4px rgba(102, 102, 102, 0.08);}
+time { display: block;}
+
+.current {padding: 20px; background: #014952; color : #fff;}
+.current .date { display: block;  text-transform: uppercase;     font-weight: bold;     margin-top: 20px;}
+.current .location { display: block;font-weight: bold; margin-top: 10px;text-transform: uppercase;    }
+.current time { font-size: 80px ; overflow: hidden;}
+.current .hm { float: left; display: block; margin-right: 10px}
+.current .prd {margin-top: 24px; }
+.current time .s , .current time .a{ font-size: 20px; display: block;}
+.current time .s { }
+.current time .a { }
+
+.timings { overflow: hidden; padding: 20px; }
+.timings .adhan { font-size: 18px;line-height: 60px;   }
+.timings time ,.timings h3 {display: inline-block; text-transform: uppercase; } 
+.timings time{   float: right; }
+.timings h3{  }
+.timings .adhan.active{ color: #0198aa; line-height: 80px; font-size: 30px; text-shadow: 4px 4px 10px #c7cbc3;}
+
+footer{ text-align: center; margin-top: 40px; font-size: 14px }
+footer p{ margin-top: 10px}
+
+
+@media (max-width:  720px){
+    .app {  width: 480px}
+}
+
+@media (max-width:  480px){
+    .app {  width: 320px}
+    .current time { font-size:  60px }
+    .current .prd {margin-top: 11px}
+}
+.loading { margin: 80px auto;text-align: center;}
