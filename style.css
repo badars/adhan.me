@@ -5,72 +5,58 @@ ol, ul {    list-style: none;}
 blockquote, q {    quotes: none;}
 blockquote:before, blockquote:after, q:before, q:after {content: "";content: none;}
 table {    border-collapse: collapse;    border-spacing: 0;}
-.clear:after {  
-  content: "";
-  clear: both;
-  display: table;
-}
-*{ position: relative;}
+
+*{ position: relative; box-sizing: border-box;}
 html {   height: 100%;     zoom: 100%;}
-body { background: #fff; color : #fff;font-family: 'Roboto Mono',"Sans Serif";min-height: 100%;font-size: 100%; }
-a {color : #fff;}
-section { width: 100%;display: block; }
-time { display: block;}
+body { background: #fff; color : #026470;font-family: 'Roboto Mono',"Sans Serif";min-height: 100%;font-size: 100%; }
+a {color : #026470;}
+section { width: 100%;display: block;}
 
-.wrapper { background-image: linear-gradient(to bottom, rgba(242, 242, 242, 1) 300px, rgba(242, 242, 242, 0) 500px); 
-background: #ddd;
+.wrapper { background-image: linear-gradient(to bottom, rgba(242, 242, 242, 1) 300px, rgba(242, 242, 242, 0) 500px); }
+.background{height: 398px;position: absolute;top: 0;width: 100%;background: #026470;
+
+background: #ee0979;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #ff6a00, #ee0979);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #ff6a00, #ee0979); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
-.background{height: 398px;position: absolute;top: 0;width: 100%;background: #026470;}
 
 .app{  width: 100%; max-width: 720px; margin: 0px auto; font-weight: bold;  }
 header{padding: 20px 0; margin-bottom: 20px }
 header h1 { font-size: 16px; color: #fff; text-transform: uppercase; }
 
 nav a { display: inline-block; margin-right: 20px; font-size: 10px; color: #fff; text-transform: uppercase; font-weight: bold; }
-.swiper-container { background: #014952; width: 100%;  margin: 0; box-shadow: 1px 1px 10px 4px rgba(102, 102, 102, 0.08);
-background: #ee0979;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #ff6a00, #ee0979);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #ff6a00, #ee0979); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-height: 100vh}
-.swiper-container section{ height: 100vh; box-sizing: border-box; padding: 20px}
+main {  width: 100%;  margin: 10px 0; }
+time { display: block;}
 
-.current { color : #fff; }
-.current .content { padding: 40% 20px 20px;}
-.current time { font-size: 60px ; overflow: hidden; float: left}
-
+.current {padding: 20px; color : #fff;}
+.current .date { display: block;  text-transform: uppercase;     font-weight: bold;     margin-top: 20px;}
+.current .location { display: block;font-weight: bold; margin-top: 10px;text-transform: uppercase;    }
+.current time { font-size: 80px ; overflow: hidden;}
 .current .hm { float: left; display: block; margin-right: 10px}
-.current .prd {margin-top: 8px; float: right }
-.current time .s , .current time .a{ font-size: 24px; display: block;}
-.current .date { display: block;  text-transform: uppercase;     font-weight: bold;  
- margin-top: 80px;}
-.current .location { display: block;font-weight: bold;
- margin-top: 10px;text-transform: uppercase;  
-   }
-   .current .btns{
-       margin-top: 40px;
-   }
-   .current .btns p{
-    margin: 10px 0;
-   }
+.current .prd {margin-top: 24px; }
+.current time .s , .current time .a{ font-size: 20px; display: block;}
+.current time .s { }
+.current time .a { }
 
-.timings { padding: 20px; }
-.timings .content { padding: 40% 20px 20px;}
-.timings h2 { font-size: 28px;margin-bottom: 10px; line-height: 1.25em; }
-.timings p { font-size: 13;margin-bottom: 40px; line-height: 1.25em; }
-.timings .adhan { font-size: 14px;line-height: 28px;}
-.timings .adhan:first-child h3{ font-size: 21px; margin-top: -27px }
+.timings { overflow: hidden; padding: 20px;  box-shadow: 1px 1px 10px 4px rgba(102, 102, 102, 0.08); background: #fff}
+.timings .adhan { font-size: 16px;line-height: 32px;   }
 .timings time ,.timings h3 {display: inline-block; text-transform: uppercase; } 
-.timings .adhan.active{ color: #0198aa; line-height: 80px; font-size: 30px; text-shadow: 4px 4px 10px #c7cbc3;}
-.timings time.st{   float: left; position: relative }
-.timings time.nd {  float:right}
-.timings h3{ float: left; width: 50%}
+.timings time{   float: right; }
+.timings h2{  
+    font-size: 24px;
+    margin: 20px 0 30px;
+    text-align: left;
+    text-transform: uppercase;
+    color: #fd610b;
+}
+/*.timings .adhan.active{ color: #0198aa; line-height: 80px; font-size: 30px; text-shadow: 4px 4px 10px #c7cbc3;}*/
 
 footer{ text-align: center; margin-top: 40px; font-size: 14px }
 footer p{ margin-top: 10px}
 
 
-/*@media (max-width:  720px){
+@media (max-width:  720px){
     .app {  width: 480px}
 }
 
@@ -78,27 +64,5 @@ footer p{ margin-top: 10px}
     .app {  width: 320px}
     .current time { font-size:  60px }
     .current .prd {margin-top: 11px}
-}*/
+}
 .loading { margin: 80px auto;text-align: center;}
-
-
-.ramzan-timings{
-    padding: 20px;
-    /*background: #4CAF50;*/
-    color: #fff;
-}
-
-.ramzan-timings h2{
-    font-size: 24px
-}
-
-
-.btn{
-    color: #fff;
-    padding: 10px 20px;
-    display: inline-block;
-    border: 1px solid #ddd;
-    border-radius: 10003em;
-    background: rgba(23, 23, 23, 0.07);
-    text-decoration: none;
-}

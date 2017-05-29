@@ -6,156 +6,111 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" type="text/css" href="style.css?v=4">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
 </head>
 
 <body>
     <div class="wrapper">
         <div class="background"></div>
         <div class="app">
-            <!--<header>
+            <header>
                 <h1> Adhan.me  ( Beta ) </h1> 
-            </header>-->
+            </header>
             <!-- <nav> <a> Adhan </a> <a> Alaram </a> </nav> -->
-            
-            <div class="swiper-container">
-                 <div class="swiper-pagination"></div>       
-                <div class="swiper-wrapper">
-                    <section class="current swiper-slide" id="current" data-hash="current">
-                        <div class="content">
-                            <time class="time">
-                                <span class="hm"> </span>
-
-                                <div class="prd">
-                                    <span class="a"></span>
-                                    <span class="s"></span>
-                                </div>
-                            </time>
-                            <span class="date"></span>
-                            <span class="location"> </span>
-                            <div class="btns">
-                                <p><a href="#namaz-timings" class="btn" onclick="mySwiper.slideTo(1)"> Namaz timings </a> </p>
-                                <p><a href="#namaz-timings" class="btn" onclick="mySwiper.slideTo(1)"> Ramzan timings </a> </p>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!--<section class="ramzan-timings">
-                    <h2> Ramzan timings </h2>
-                    <time class="time">
-                        <span class="hm">3:40</span>
+            <main>
+                <section class="current" id="current">
+                    <time > 
+                    	<span class="hm"> </span>
                         <div class="prd">
-                            <span class="a">25</span>
-                            <span class="s">AM</span>
+                            <span class="a"></span>
+                            <span class="s"></span>
                         </div>
                     </time>
-                </section>-->
-
-                    <section class="timings swiper-slide" data-hash="namaz-timings">
-                        <div class="content">
-                            <h2> Namaz Timings </h2>
-                            <p class="timings-desc"></p>
-                            <div class="timings-items">
-                                <div class="loading"> Loading , please wait </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
-            <footer>
-                <p> &copy; Adhan.me 2016</p>
+                    <span class="date"></span>
+                    <span class="location"> </span>
+                </section>
+            
+                <section class="timings">
+                    <h2>Adhan timings</h2>
+                    <div class="timings-items">
+                        <p class="loading">  Loading , please wait </p>
+                    </div>
+                </section>
+                
+            </main>
+            <footer> 
+                <p> &copy; Adhan.me  2016</p>
             </footer>
         </div>
     </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.min.js">
-
-    </script>
-
+    <script   src="https://code.jquery.com/jquery-3.0.0.min.js"   integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-        (function ($) {
 
-            var midnight = new Date().setHours(0, 0, 0, 0);
+    	(function($){
+
+            var midnight = new Date().setHours(0,0,0,0);
             var nowDiff = new Date().getTime() - midnight;
             var nextNamaz = 'fajr'
-            var inNamazes = ['fajr', 'shurooq', 'dhuhr', 'asr', 'maghrib', 'isha']
+            var inNamazes = ['fajr','shurooq','dhuhr','asr','maghrib','isha']
             var timings;
             var location;
-            var init = function () {
+            var init = function(){
                 updateCurrentTime();
-                getTimings().then(function (data) {
+                getTimings().then(function(data){
                     timings = modifyTimings(data.items[0])
                     location = data.city;
                     calculateDiff()
                     updateTimings()
                 })
             }
-            var getTimings = function (fn) {
+            var getTimings = function(fn){
+
                 return $.when($.getJSON('http://muslimsalat.com/daily.json?key=API_KEY&jsoncallback=?'))
             }
-            var _updateCurrentTime = function () {
+            var _updateCurrentTime = function(){
                 $('#current .hm').html(moment().format('hh:mm'))
                 $('#current .s').html(moment().format('ss'))
                 $('#current .a').html(moment().format('A'))
                 $('#current .date').html(moment().format('LL'))
 
             }
-            var updateCurrentTime = function () {
-                setInterval(function () {
-                    _updateCurrentTime()
-                }, 1000)
+            var updateCurrentTime = function(){
+                setInterval(function(){
+                        _updateCurrentTime()
+                },1000)
                 _updateCurrentTime()
             }
 
-            var modifyTimings = function (timings) {
+           var  modifyTimings = function  (timings){
                 var out = [];
-                for (let k in timings) {
-                    if (inNamazes.indexOf(k) > -1)
-                        out.push({ n: k, t: timings[k] })
+                for(let k in timings){
+                    if(inNamazes.indexOf(k)>-1)
+                    out.push({n : k , t : timings[k]})
                 }
                 return out
             }
             var calculateDiff = function () {
-                timings = timings.map(function (t) {
-                    t.diff = moment(t.t, ["h:mm A"]).format('x') - midnight
-                    return t;
+                timings = timings.map(function(t){
+                    t.diff =  moment(t.t,["h:mm A"]).format('x') - midnight
+                    return t ;
                 })
-                nextNamaz = (timings.filter(function (t) {
+                nextNamaz = (timings.filter(function(t){
                     return t.diff > nowDiff;
                 })[0] || timings[0]).n
             }
-            var updateTimings = function () {
-                var items = timings.map(function (a) {
-                    // var active = a.n === nextNamaz ? 'active' : ''
-                    return timingItemTemplate({ n: a.n, t: a.t })
+            var updateTimings = function(){
+                var items = timings.map(function(a){
+                        var active = a.n === nextNamaz ? 'active' : ''
+                        return (" <div class='adhan "+ active +"'> <h3>"+a.n +" </h3> <time>"+a.t+"</time> </div>")
                 })
-                items.unshift(timingItemTemplate({ n: "&nbsp", t: "Start", f: "End" }))
                 $('.timings-items').html(items)
                 $('.location').html(location)
-                $('.timings-desc').html(" Salath timings for " + location + "," + moment().format('LL'))
-
             }
-            var timingItemTemplate = function (data) {
-                return " <div class='adhan clear'>" +
-                    "<h3>" + (data.n || '&nbsp;') + " </h3>" +
-                    "<time class='st'>" + data.t + "</time>" +
-                    "<time class='nd'>" + data.t + "</time>" +
-                    "</div>";
-            }
-            window.mySwiper = new Swiper('.swiper-container', {
-                // Optional parameters
-                direction: 'horizontal',
-                loop: false,
-                 pagination: '.swiper-pagination',
-                  hashnav: true,
-            })
             $(document).ready(init)
-        })($)
+    	})($)
     </script>
 </body>
 
